@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>Static Task View</title>
+
+<style type="text/css">
+table, th, td
+{
+	border: 1px solid black;
+}
+</style>
+
+</head>
+
+<script src = "task_list/taskViewJSON.js">
+	var tasklist = JSON.parse(tasklist);
+	
+	var checked = tasklist.checked[0];
+	var title = tasklist.title[0];
+	var description = tasklist.description[0];
+	
+</script>
+
+<body>
+	
+<table>
+	<tr>
+		<th>Completed</th>
+		<th>Title</th>
+		<th>Description</th>
+	</tr>
+	
+	<tr>
+		<td>tasklist.checked[0]</td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	
+	<tr>
+		<td><input type = "checkbox"></td>
+		<td>Shave Kleiner's Head</td>
+		<td>Medium well, shaken, not stirred.</td>
+	</tr>
+	
+	<tr>
+		<td><input type = "checkbox"></td>
+		<td>Bathe Father Grigori</td>
+		<td>"Scrub, scrub, scrub till the water's BROWN!"</td>
+	</tr>
+	
+	<tr>
+		<td><input type = "checkbox"></td>
+		<td>Grape</td>
+		<td>Eat a grape.</td>
+	</tr>
+</table>
+</body>
+</html>
