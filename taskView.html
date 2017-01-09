@@ -14,59 +14,54 @@ table, th, td
 
 </head>
 
-<script src = "task_list/taskViewJSON.js">
-	var tasklist = JSON.parse(tasklist);
-	
-	var checked = tasklist.checked[0];
-	var title = tasklist.title[0];
-	var description = tasklist.description[0];
-	
+<body>
+<p id = "demo"></p>
+<script src = "jquery-3.1.1.min.js"></script>
+
+<script>
+/*var obj, dbParam, xmlhttp, tasklist, x, txt = "";
+
+dbParam = JSON.stringify(obj);
+xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        tasklist = JSON.parse(this.responseText);
+        txt += "<table border='1'>"
+        for (x in tasklist) {
+            txt += "<tr><td>" + tasklist[x].title + "</td></tr>";
+        }
+        txt += "</table>"
+        document.getElementById("demo").innerHTML = txt;
+    }
+}
+xmlhttp.open("POST", "tasklist", true);
+xmlhttp.send("x=" + dbParam);
+*/
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() 
+{
+    if (this.readyState == 4 && this.status == 200) 
+    {
+        var tasklist = JSON.parse(this.responseText);
+        document.getElementById("demo").innerHTML = tasklist[0].title;
+    }
+};
+xmlhttp.open("GET", "taskViewJSON.json", true);
+xmlhttp.send();
+
 </script>
 
-<body>
-	
-<table>
+
+
+<table id = "tasks">
 	<tr>
 		<th>Completed</th>
 		<th>Title</th>
 		<th>Description</th>
 	</tr>
 	
-	<tr>
-		<td>tasklist.checked[0]</td>
-		<td></td>
-		<td></td>
-	</tr>
-	
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	
-	<tr>
-		<td><input type = "checkbox"></td>
-		<td>Shave Kleiner's Head</td>
-		<td>Medium well, shaken, not stirred.</td>
-	</tr>
-	
-	<tr>
-		<td><input type = "checkbox"></td>
-		<td>Bathe Father Grigori</td>
-		<td>"Scrub, scrub, scrub till the water's BROWN!"</td>
-	</tr>
-	
-	<tr>
-		<td><input type = "checkbox"></td>
-		<td>Grape</td>
-		<td>Eat a grape.</td>
-	</tr>
 </table>
 </body>
 </html>
