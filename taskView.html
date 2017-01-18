@@ -38,7 +38,7 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("POST", "tasklist", true);
 xmlhttp.send("x=" + dbParam);
 */
-
+/*
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() 
 {
@@ -50,7 +50,15 @@ xmlhttp.onreadystatechange = function()
 };
 xmlhttp.open("GET", "taskViewJSON.json", true);
 xmlhttp.send();
+*/
 
+var myTitle = [31].title;
+$.ajax({url:"http://jsonplaceholder.typicode.com/posts", method:"GET", dataType:"json", data:{myTitle}})
+    .done(function (myTitle)
+         {
+             return myTitle;
+             
+         });
 </script>
 
 
