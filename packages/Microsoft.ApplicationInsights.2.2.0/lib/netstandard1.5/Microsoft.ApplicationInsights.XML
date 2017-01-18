@@ -4,15 +4,22 @@
         <name>Microsoft.ApplicationInsights</name>
     </assembly>
     <members>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformImplementation">
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.#ctor">
             <summary>
-            The .NET 4.0 and 4.5 implementation of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.IPlatform"/> interface.
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> class.
             </summary>
+            <remarks>
+            This constructor is protected because <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> is only meant to be instantiated 
+            by the <see cref="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.Instance"/> property or by tests.
+            </remarks>
         </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformImplementation.ReadConfigurationXml">
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.Instance">
             <summary>
-            Returns contents of the ApplicationInsights.config file in the application directory.
+            Gets or sets the default <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> instance used by <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/>.
             </summary>
+            <remarks>
+            This property is a test isolation "pinch point" that allows us to test <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/> without using reflection.
+            </remarks>
         </member>
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformImplementation.GetDebugOutput">
             <summary>
@@ -33,170 +40,6 @@
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformSingleton.Current">
             <summary>
             Gets or sets the current <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.IPlatform"/> implementation.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> class.
-            </summary>
-            <remarks>
-            This constructor is protected because <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> is only meant to be instantiated 
-            by the <see cref="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.Instance"/> property or by tests.
-            </remarks>
-        </member>
-        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory.Instance">
-            <summary>
-            Gets or sets the default <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryConfigurationFactory"/> instance used by <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/>.
-            </summary>
-            <remarks>
-            This property is a test isolation "pinch point" that allows us to test <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/> without using reflection.
-            </remarks>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource">
-            <summary>
-            Define the telemetry handlers.
-            Create anonymous type for each AI telemetry data type.
-            </summary>
-            <summary>
-            RichPayload Event Source (.Net 4.5 version)
-            It dynamically checks the runtime version and only emits the event if the runtime is .Net Framework 4.6 and above.
-            As .Net 4.5 project doesn't support EventDataAttribute, the class uses the anonymous type (RichPayloadEventSource.TelemetryHandler.cs) for the corresponding telemetry data type.
-            The anonymous type keeps the same properties and layout as the telemetry data type schema. 
-            Once you update the data type, you should also update the anonymous type.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateTelemetryHandlers(System.Diagnostics.Tracing.EventSource)">
-            <summary>
-            Create handlers for all AI telemetry types.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForRequestTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for request telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForTraceTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for trace telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForEventTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for event telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForDependencyTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for dependency telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForMetricTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for metric telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForExceptionTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for exception telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForPerformanceCounterTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for performance counter telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForPageViewTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for page view telemetry.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForSessionStateTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
-            <summary>
-            Create handler for session state telemetry.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Log">
-            <summary>RichPayloadEventSource instance.</summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.EventSourceInternal">
-            <summary>Event source.</summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.EventProviderName">
-            <summary>Event provider name.</summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.telemetryHandlers">
-            <summary>A dictionary mapping each telemetry item type to its handler.</summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.#ctor">
-            <summary>
-            Initializes a new instance of the RichPayloadEventSource class.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Process(Microsoft.ApplicationInsights.Channel.ITelemetry)">
-            <summary>
-            Process a collected telemetry item.
-            </summary>
-            <param name="item">A collected Telemetry item.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Dispose">
-            <summary>
-            Disposes the object.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Dispose(System.Boolean)">
-            <summary>
-            Disposes the object.
-            </summary>
-            <param name="disposing">True if disposing.</param>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords">
-            <summary>
-            Keywords for the RichPayloadEventSource.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Requests">
-            <summary>
-            Keyword for requests.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Traces">
-            <summary>
-            Keyword for traces.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Events">
-            <summary>
-            Keyword for events.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Exceptions">
-            <summary>
-            Keyword for exceptions.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Dependencies">
-            <summary>
-            Keyword for dependencies.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Metrics">
-            <summary>
-            Keyword for metrics.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.PageViews">
-            <summary>
-            Keyword for page views.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.PerformanceCounters">
-            <summary>
-            Keyword for performance counters.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.SessionState">
-            <summary>
-            Keyword for session state.
             </summary>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.ComponentContext">
@@ -345,16 +188,6 @@
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.ExceptionConverter.SanitizeStackFrame``2(System.Collections.Generic.IList{``0},System.Func{``0,System.Int32,``1},System.Func{``1,System.Int32})">
             <summary>
             Sanitizing stack to 32k while selecting the initial and end stack trace.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.ExceptionConverter.GetStackFrame(System.Diagnostics.StackFrame,System.Int32)">
-            <summary>
-            Converts a System.Diagnostics.StackFrame to a Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryTypes.StackFrame.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.ExceptionConverter.GetStackFrameLength(Microsoft.ApplicationInsights.Extensibility.Implementation.External.StackFrame)">
-            <summary>
-            Gets the stack frame length for only the strings in the stack frame.
             </summary>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.InternalContext">
@@ -1127,82 +960,6 @@
             Gets the telemetry modules collection.
             </summary>
         </member>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1">
-            <summary>
-            Operation class that holds the telemetry item and the corresponding telemetry client.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.ParentContext">
-            <summary>
-            Parent context store that is used to restore call context.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.#ctor(Microsoft.ApplicationInsights.TelemetryClient,`0)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1"/> class.
-            Initializes telemetry client.
-            </summary>
-            <param name="telemetryClient">Initializes telemetry client object.</param>
-            <param name="telemetry">Operation telemetry item that is assigned to the telemetry associated to the current operation item.</param>
-        </member>
-        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Telemetry">
-            <summary>
-            Gets Telemetry item of interest that is created when StartOperation function of ClientExtensions is invoked.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Dispose">
-            <summary>
-            Dispose method to clear the variables.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Dispose(System.Boolean)">
-            <summary>
-            Computes the duration and tracks the respective telemetry item on dispose.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.OperationContextSlotName">
-            <summary>
-            Name of the operation context store item present in the context.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.SaveOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext)">
-            <summary>
-            Saves the context store to the call context.
-            </summary>
-            <param name="operationContext">Operation context store instance.</param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.GetCurrentOperationContext">
-            <summary>
-            Returns the current operation context store present in the call context.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.RestoreOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext)">
-            <summary>
-            Clears the call context and restores the parent operation.
-            </summary>
-            <param name="parentContext">Parent operation context store to replace child operation context store.</param>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext">
-            <summary>
-            Operation class that holds operation id and operation name for the current call context.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.ParentOperationId">
-            <summary>
-            Operation id that will be assigned to all the child telemetry items.
-            Parent Operation id that will be assigned to all the child telemetry items.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.RootOperationId">
-            <summary>
-            Root Operation id that will be assigned to all the child telemetry items.
-            </summary>
-        </member>
-        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.RootOperationName">
-            <summary>
-            Operation name that will be assigned to all the child telemetry items.
-            </summary>
-        </member>
         <member name="T:Microsoft.ApplicationInsights.Extensibility.IDebugOutput">
             <summary>
             Encapsulates method call that has to be compiled with DEBUG compiler constant.
@@ -1367,17 +1124,6 @@
             <summary>
             Populates <see cref="P:Microsoft.ApplicationInsights.Channel.ITelemetry.Sequence"/> with unique ID and sequential number.
             </summary>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.Extensibility.OperationCorrelationTelemetryInitializer">
-            <summary>
-            Telemetry initializer that populates OperationContext for the telemetry item based on context stored in CallContext.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.Extensibility.OperationCorrelationTelemetryInitializer.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)">
-            <summary>
-            Initializes/Adds operation id to the existing telemetry item.
-            </summary>
-            <param name="telemetryItem">Target telemetry item to add operation id.</param>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Channel.InMemoryChannel">
             <summary>
@@ -1637,6 +1383,14 @@
             A tuple with the first item being a Transmission object with n ITelemetry objects
             and the second item being a Transmission object with the remaining ITelemetry objects.
             </returns>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Channel.Transmission.CreateRequestMessage(System.Uri,System.IO.Stream)">
+            <summary>
+            Creates an http request for sending a transmission.
+            </summary>
+            <param name="address">The address of the web request.</param>
+            <param name="contentStream">The stream to write to.</param>
+            <returns>The request. An object of type HttpRequestMessage.</returns>
         </member>
         <member name="M:Microsoft.ApplicationInsights.Channel.Transmission.CreateRequest(System.Uri)">
             <summary>
@@ -1969,12 +1723,6 @@
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.InnerExceptionCountExceededException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
             </summary>
             <param name="message">The error message that explains the reason for the exception. </param><param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified. </param>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.DataContracts.InnerExceptionCountExceededException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.InnerExceptionCountExceededException"/> class with serialized data.
-            </summary>
-            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown. </param><param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null. </exception><exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0). </exception>
         </member>
         <member name="T:Microsoft.ApplicationInsights.DataContracts.ISupportProperties">
             <summary>
@@ -2881,27 +2629,6 @@
             <summary>
             Returns min DateTimeOffset value if not a valid DateTimeOffset.
             </summary>
-        </member>
-        <member name="T:Microsoft.ApplicationInsights.TelemetryClientExtensions">
-            <summary>
-            Extension class to telemetry client that creates operation object with the respective fields initialized.
-            </summary>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String)">
-            <summary>
-            Start operation creates an operation object with a respective telemetry item. 
-            </summary>
-            <typeparam name="T">Type of the telemetry item.</typeparam>
-            <param name="telemetryClient">Telemetry client object.</param>
-            <param name="operationName">Name of the operation that customer is planning to propagate.</param>
-            <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
-        </member>
-        <member name="M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})">
-            <summary>
-            Stop operation computes the duration of the operation and tracks it using the respective telemetry client.
-            </summary>
-            <param name="telemetryClient">Telemetry client object.</param>
-            <param name="operation">Operation object to compute duration and track.</param>
         </member>
     </members>
 </doc>
