@@ -16,7 +16,8 @@ table, th, td
 
 <body>
 <p id = "demo"></p>
-<script src = "jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="taskview.js" type="text/javascript"></script>
 
 <script>
 /*var obj, dbParam, xmlhttp, tasklist, x, txt = "";
@@ -52,13 +53,8 @@ xmlhttp.open("GET", "taskViewJSON.json", true);
 xmlhttp.send();
 */
 
-var myTitle = [31].title;
-$.ajax({url:"http://jsonplaceholder.typicode.com/posts", method:"GET", dataType:"json", data:{myTitle}})
-    .done(function (myTitle)
-         {
-             return myTitle;
-             
-         });
+
+
 </script>
 
 
